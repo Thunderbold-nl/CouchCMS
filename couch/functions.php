@@ -3410,6 +3410,76 @@ OUT;
             return $this->_t[$key];
         }
 
+		// Utility func to get the translated month names by number
+		// Uses the names given in the language files
+		// $monthNum 	=> (int) 	Month number(1 - 12)
+		// $short		=> (bool)	Generate shortcode name
+		// $case		=> (int) 	0 = as-is
+		//							> 0 = fully uppercase
+		//							< 0 = fully lowercase
+		//$FUNCS->
+		function monthname ($monthNum, $short=false, $case=0) {
+			settype ( $monthNum , "int");
+			settype ($short, "bool");
+			settype ($case, "int");
+            $arrMonths = array(1=>$this->t('month01'), 2=>$this->t('month02'), 3=>$this->t('month03'), 4=>$this->t('month04'),
+                               5=>$this->t('month05'), 6=>$this->t('month06'), 7=>$this->t('month07'), 8=>$this->t('month08'),
+                               9=>$this->t('month09'), 10=>$this->t('month10'), 11=>$this->t('month11'), 12=>$this->t('month12'));			
+            $arrS_Months = array(1=>$this->t('s_month01'), 2=>$this->t('s_month02'), 3=>$this->t('s_month03'), 4=>$this->t('s_month04'),
+                               5=>$this->t('s_month05'), 6=>$this->t('s_month06'), 7=>$this->t('s_month07'), 8=>$this->t('s_month08'),
+                               9=>$this->t('s_month09'), 10=>$this->t('s_month10'), 11=>$this->t('s_month11'), 12=>$this->t('s_month12'));			
+			if ($short=false) { 
+				if ($case == 0) {
+					return $arrMonths[$monthNum];
+				} else if ($case < 0) {
+					return strtolower($arrMonths[$monthNum]);
+				} else {
+					return strtoupper($arrMonths[$monthNum]);
+				}
+			} else {
+				if ($case == 0) {
+					return $arrS_Months[$monthNum];
+				} else if ($case < 0) {
+					return strtolower($arrS_Months[$monthNum]);
+				} else {
+					return strtoupper($arrS_Months[$monthNum]);
+				}
+			}
+		}
+
+		// Utility func to get the translated day names by number
+		// Uses the names given in the language files
+		// $dayNum 		=> (int) 	day number (0 - 7, corrected for the use of the w or N parameter on date function)
+		// $short		=> (bool)	Generate shortcode name
+		// $case		=> (int) 	0 = as-is
+		//							> 0 = fully uppercase
+		//							< 0 = fully lowercase
+		function dayname ($dayNum, $short=false, $case=0) {
+			settype ( $dayNum , "int" );
+			settype ( $case, "int");
+            $arrDays = array(	0=>$FUNCS->t('day0'), 1=>$FUNCS->t('day1'), 2=>$FUNCS->t('day2'), 3=>$FUNCS->t('day3'), 
+								4=>$FUNCS->t('day4'), 5=>$FUNCS->t('day5'), 6=>$FUNCS->t('day6'), 7=>$FUNCS->t('day7'));	
+            $arrS_Days = array(	0=>$FUNCS->t('s_day0'), 1=>$FUNCS->t('s_day1'), 2=>$FUNCS->t('s_day2'), 3=>$FUNCS->t('s_day3'), 
+								4=>$FUNCS->t('s_day4'), 5=>$FUNCS->t('s_day5'), 6=>$FUNCS->t('s_day6'), 7=>$FUNCS->t('s_day7'));	
+			if ($short=false) { 
+				if ($case == 0) {
+					return $arrDays[$dayNum];
+				} else if ($case < 0) {
+					return strtolower($arrDays[$dayNum]);
+				} else {
+					return strtoupper($arrDays[$dayNum]);
+				}
+			} else {
+				if ($case == 0) {
+					return $arrS_Days[$dayNum];
+				} else if ($case < 0) {
+					return strtolower($arrS_Days[$dayNum]);
+				} else {
+					return strtoupper($arrS_Days[$dayNum]);
+				}
+			}
+		}
+        
         function ti( $icon_name ){
 
             return ( $this->_ti[$icon_name] ) ? $this->_ti[$icon_name] : $icon_name;
