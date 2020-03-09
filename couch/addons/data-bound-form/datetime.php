@@ -140,8 +140,13 @@
                     $arrMonths = explode( ',', $this->months );
                 }
                 else{
-                    $arrMonths = array( 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+//                    $arrMonths = array( 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+//                                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec');
+// Use translated short monthnames instead
+					for( $xx=1; $xx<=12; $xx++ ){
+						$arrMonths[$xx-1]= $FUNCS->monthname($xx,true,0);
+					}
+                }
                 }
 
                 if( strlen($date) ){
